@@ -5,6 +5,7 @@ import { whatsappUrl } from "@/lib/contact";
 const links = [
   { href: "#servicos", label: "Serviços" },
   { href: "#processo", label: "Como funciona" },
+  { href: "#sobre", label: "Sobre" },
   { href: "#contato", label: "Contato" },
 ];
 
@@ -16,7 +17,7 @@ export function Header() {
         <a href="#inicio" aria-label="Cameleon, voltar ao início">
           <Logo />
         </a>
-        <nav aria-label="Principal" className="glass hidden rounded-full px-2 py-1.5 md:block">
+        <nav aria-label="Principal" className="glass hidden rounded-full px-2 py-1.5 lg:block">
           <ul className="flex items-center text-sm text-dim">
             {links.map((link) => (
               <li key={link.href}>
@@ -27,7 +28,7 @@ export function Header() {
             ))}
           </ul>
         </nav>
-        <ButtonLink href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="h-10 px-5 text-sm">
+        <ButtonLink href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="h-10 px-5 text-sm whitespace-nowrap">
           Fale comigo
         </ButtonLink>
       </div>

@@ -85,10 +85,23 @@ html.lenis body {
   overflow: hidden;
 }
 
-/* Painel de vidro escuro: deixa o texto legível sobre as partículas */
-.glass {
+/* Painel de vidro escuro: deixa o texto legível sobre as partículas.
+   Como @utility, aceita variantes (ex.: portrait:glass). */
+@utility glass {
   background: linear-gradient(160deg, rgb(255 255 255 / 0.06), rgb(255 255 255 / 0.015));
   border: 1px solid var(--hairline);
   backdrop-filter: blur(14px) saturate(1.2);
   -webkit-backdrop-filter: blur(14px) saturate(1.2);
 }
+
+/* Versão mais densa do vidro: para textos longos por cima do camaleão */
+@utility glass-dense {
+  background: linear-gradient(160deg, rgb(22 21 34 / 0.82), rgb(5 5 11 / 0.9));
+  border: 1px solid var(--hairline);
+  backdrop-filter: blur(18px) saturate(1.2);
+  -webkit-backdrop-filter: blur(18px) saturate(1.2);
+}
+
+/* Telas em pé (celular e tablet): o camaleão fica no alto e o texto passa por
+   baixo dele. Mesmo limite usado em components/three/choreography.ts. */
+@custom-variant portrait (@media (max-aspect-ratio: 9/10));

@@ -8,6 +8,10 @@ import { contact, whatsappUrl } from "@/lib/contact";
 
 const sectionBase = "relative flex min-h-svh items-end px-5 pb-16 sm:px-8 md:items-center md:pb-0";
 
+// Em telas em pé, textos longos ganham um painel de vidro para continuarem
+// legíveis quando passam por cima do camaleão.
+const readablePanel = "portrait:glass-dense portrait:rounded-3xl portrait:p-6";
+
 export function Hero() {
   return (
     <section id="inicio" data-scene aria-labelledby="hero-title" className={`${sectionBase} pt-28`}>
@@ -112,7 +116,11 @@ export function Services() {
 
 // Aqui a numeração faz sentido: as etapas acontecem nessa ordem.
 const steps = [
-  { title: "Conversa", text: "Entendo o negócio, o público e quem são os concorrentes na sua região." },
+  {
+    title: "Reunião de alinhamento",
+    text: "Conversamos sobre os objetivos da sua empresa e os valores que ela quer transmitir. É daqui que sai a direção de todo o projeto.",
+  },
+  { title: "Diagnóstico", text: "Estudo o negócio, o público e quem são os concorrentes na sua região." },
   { title: "Adaptação", text: "Defino cores, fontes e o jeito de falar que combinam com a sua empresa." },
   { title: "Criação", text: "Monto o site, repagino as redes e completo o perfil no Google Maps." },
   { title: "Acompanhamento", text: "Nos primeiros 30 dias, ajusto o que for preciso e ensino a manter tudo em dia." },
@@ -122,7 +130,7 @@ export function Process() {
   return (
     <section id="processo" data-scene aria-labelledby="processo-title" className={sectionBase}>
       <div className="mx-auto w-full max-w-7xl">
-        <div className="max-w-lg">
+        <div className={`max-w-lg ${readablePanel}`}>
           <h2
             id="processo-title"
             className="font-display text-[clamp(2.2rem,4.5vw,3.6rem)] leading-none font-light tracking-[-0.03em]"
@@ -142,6 +150,66 @@ export function Process() {
               </li>
             ))}
           </ol>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// Princípios, não etapas: por isso não levam número.
+const principles = [
+  {
+    title: "Primeiro o resultado, depois o enfeite.",
+    text: "Cada tela leva o visitante a uma ação clara: chamar no WhatsApp, pedir orçamento ou agendar.",
+  },
+  {
+    title: "Identidade que gera confiança.",
+    text: "Uma marca igual em todo lugar passa profissionalismo. E cliente confiante decide mais rápido.",
+  },
+  {
+    title: "Decisões guiadas por dados.",
+    text: "Acompanho cliques, mensagens e buscas no Google para ajustar o que converte e cortar o que não converte.",
+  },
+];
+
+export function About() {
+  return (
+    <section id="sobre" data-scene aria-labelledby="sobre-title" className={`${sectionBase} md:py-24`}>
+      <div className="mx-auto flex w-full max-w-7xl md:justify-end">
+        <div className={`max-w-xl ${readablePanel}`}>
+          <p className="text-sm text-dim">Quem está por trás da Cameleon</p>
+          <h2
+            id="sobre-title"
+            className="mt-4 font-display text-[clamp(2.4rem,5vw,4.2rem)] leading-[0.95] font-light tracking-[-0.035em]"
+          >
+            Prazer, eu sou o Gabriel.
+          </h2>
+          <p className="mt-6 text-xl leading-snug sm:text-2xl">
+            Desenvolvedor especialista em conversão. Renovo a identidade da sua marca para que ela
+            seja lembrada, e escolhida.
+          </p>
+          <p className="mt-5 text-lg leading-relaxed text-dim">
+            Design bonito que não traz cliente é só decoração. Da cor do botão ao texto do seu
+            perfil no Google, cada decisão tem um objetivo: transformar quem passa pela sua marca em
+            contato, orçamento e venda.
+          </p>
+
+          <ul className="mt-10 space-y-6 border-l border-hairline pl-6">
+            {principles.map((principle) => (
+              <li key={principle.title} className="relative">
+                <span
+                  aria-hidden
+                  className="absolute top-2 -left-[1.6rem] size-2 rounded-full bg-accent shadow-[0_0_12px_var(--accent)]"
+                />
+                <h3 className="text-lg font-medium">{principle.title}</h3>
+                <p className="mt-1 leading-relaxed text-dim">{principle.text}</p>
+              </li>
+            ))}
+          </ul>
+
+          <ButtonLink href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="mt-10">
+            Quero converter mais clientes
+          </ButtonLink>
         </div>
       </div>
     </section>

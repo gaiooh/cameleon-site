@@ -4,10 +4,12 @@ test.beforeEach(async ({ page }) => {
   await page.goto('/');
 });
 
-test('mostra a marca, o manifesto e os três serviços', async ({ page }) => {
+test('mostra a marca, o manifesto, os serviços e o sobre', async ({ page }) => {
   await expect(page).toHaveTitle(/Cameleon/);
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Sua marca, viva em cada lugar onde aparece.');
   await expect(page.getByText('Hoje, sua empresa está espalhada por dezenas de lugares.')).toBeAttached();
+  await expect(page.getByRole('heading', { name: 'Prazer, eu sou o Gabriel.' })).toBeAttached();
+  await expect(page.getByRole('heading', { name: 'Reunião de alinhamento' })).toBeAttached();
   for (const servico of ['Site profissional', 'Redes sociais repaginadas', 'Perfil completo no Google Maps']) {
     await expect(page.getByRole('heading', { name: servico })).toBeAttached();
   }

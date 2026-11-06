@@ -23,7 +23,9 @@ const desktop: Pose[] = [
   { x: -1.25, y: -0.15, z: 0, rotY: -0.25, scale: 0.8, disperse: 0, pattern: [0, 0, 0.2, 1] },
   // 5. processo: volta para a direita
   { x: 1.45, y: 0, z: 0, rotY: -2.55, scale: 0.8, disperse: 0, pattern: [0.4, 0.45, 0.4, 0] },
-  // 6. contato: centralizado, acima do texto
+  // 6. sobre: à esquerda, misturando todas as peles (adaptação em pessoa)
+  { x: -1.35, y: -0.1, z: 0, rotY: -0.35, scale: 0.85, disperse: 0, pattern: [0.45, 0.45, 0.2, 0.45] },
+  // 7. contato: centralizado, acima do texto
   { x: 0.25, y: 1.15, z: 0, rotY: -2.45, scale: 0.68, disperse: 0, pattern: [0, 0, 0.5, 0.55] },
 ];
 
