@@ -27,7 +27,11 @@ test('trocar o tema muda a cor do site', async ({ page }) => {
     page.evaluate(() => getComputedStyle(document.documentElement).getPropertyValue('--accent').trim());
   const antes = await accent();
 
-  await page.getByRole('radio', { name: 'Selva' }).check({ force: true });
+  // tenta de novo até a página terminar de carregar e responder ao clique
+  await expect(async () => {
+    await page.getByTitle('Selva').click();
+    await expect(page.getByRole('radio', { name: 'Selva' })).toBeChecked({ timeout: 1_000 });
+  }).toPass({ timeout: 15_000 });
 
   await expect(page.getByText('Mude a cor do camaleão: Selva')).toBeVisible();
   await expect.poll(accent).not.toBe(antes);

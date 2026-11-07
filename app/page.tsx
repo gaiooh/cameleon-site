@@ -2,6 +2,7 @@ import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
 import { ScrollDirector } from "@/components/scroll-director";
 import { About, Contact, Hero, Manifesto, Process, Services } from "@/components/sections";
+import { Portfolio } from "@/components/portfolio/portfolio-section";
 import { SceneCanvas } from "@/components/three/scene-canvas";
 
 export default function Home() {
@@ -21,6 +22,7 @@ export default function Home() {
         <Hero />
         <Manifesto />
         <Services />
+        <Portfolio />
         <Process />
         <About />
         <Contact />

@@ -208,6 +208,8 @@ export class ChameleonController {
     const current = u.uDisperse.value as number;
     u.uDisperse.value = intro > 0 ? disperse : damp(current, disperse, 3, dt);
     this.object.userData.disperse = u.uDisperse.value;
+    u.uOpacity.value = damp(u.uOpacity.value, lerp(a.opacity ?? 1, b.opacity ?? 1, f), 3, dt);
+    this.object.userData.opacity = u.uOpacity.value;
 
     const keys = ["x", "y", "z", "w"] as const;
     keys.forEach((key, k) => {

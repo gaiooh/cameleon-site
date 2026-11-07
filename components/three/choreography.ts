@@ -10,6 +10,8 @@ export type Pose = {
   scale: number;
   disperse: number;
   pattern: [number, number, number, number];
+  /** Brilho geral do camaleão (1 = normal). Use menos quando ele for só fundo. */
+  opacity?: number;
 };
 
 const desktop: Pose[] = [
@@ -21,22 +23,28 @@ const desktop: Pose[] = [
   { x: -1.25, y: -0.15, z: 0, rotY: -0.4, scale: 0.8, disperse: 0, pattern: [1, 0, 0.2, 0] },
   { x: -1.25, y: -0.1, z: 0, rotY: -0.65, scale: 0.8, disperse: 0, pattern: [0, 1, 0.25, 0] },
   { x: -1.25, y: -0.15, z: 0, rotY: -0.25, scale: 0.8, disperse: 0, pattern: [0, 0, 0.2, 1] },
-  // 5. processo: volta para a direita
+  // 5. projetos: vira uma nuvem distante, só como atmosfera atrás dos cards
+  { x: 0, y: 0.3, z: -9, rotY: -1.2, scale: 1.5, disperse: 1, pattern: [0, 0, 0.6, 0.25], opacity: 0.3 },
+  // 6. processo: volta para a direita
   { x: 1.45, y: 0, z: 0, rotY: -2.55, scale: 0.8, disperse: 0, pattern: [0.4, 0.45, 0.4, 0] },
-  // 6. sobre: à esquerda, misturando todas as peles (adaptação em pessoa)
+  // 7. sobre: à esquerda, misturando todas as peles (adaptação em pessoa)
   { x: -1.35, y: -0.1, z: 0, rotY: -0.35, scale: 0.85, disperse: 0, pattern: [0.45, 0.45, 0.2, 0.45] },
-  // 7. contato: centralizado, acima do texto
+  // 8. contato: centralizado, acima do texto
   { x: 0.25, y: 1.15, z: 0, rotY: -2.45, scale: 0.68, disperse: 0, pattern: [0, 0, 0.5, 0.55] },
 ];
 
 // No celular o camaleão fica na metade de cima e o texto embaixo.
-const mobile: Pose[] = desktop.map((pose, i) => ({
-  ...pose,
-  x: i === 1 ? 0 : 0.12,
-  y: i === 1 ? 0 : 1.75,
-  z: pose.z - 0.5,
-  scale: i === 1 ? 0.8 : 0.5,
-}));
+// Nas cenas em que ele vira nuvem, a nuvem continua centralizada.
+const mobile: Pose[] = desktop.map((pose) => {
+  const cloud = pose.disperse > 0.5;
+  return {
+    ...pose,
+    x: cloud ? 0 : 0.12,
+    y: cloud ? 0 : 1.75,
+    z: pose.z - 0.5,
+    scale: cloud ? pose.scale * 0.73 : 0.5,
+  };
+});
 
 export function getPoses(aspect: number) {
   return aspect < 0.9 ? mobile : desktop;

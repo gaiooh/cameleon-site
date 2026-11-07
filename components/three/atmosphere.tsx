@@ -135,7 +135,8 @@ class AtmosphereController {
       mesh.position.y = damp(mesh.position.y, chameleon.position.y + 0.1, 3, dt);
       mesh.scale.setScalar(damp(mesh.scale.x, chameleon.scale.x * 7.5, 3, dt));
       const dispersed = (chameleon.userData.disperse as number | undefined) ?? 0;
-      this.halo.uniforms.uStrength.value = 0.3 * (1 - dispersed * 0.6);
+      const opacity = (chameleon.userData.opacity as number | undefined) ?? 1;
+      this.halo.uniforms.uStrength.value = 0.3 * (1 - dispersed * 0.6) * opacity;
     }
   }
 

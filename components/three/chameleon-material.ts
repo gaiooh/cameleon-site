@@ -17,6 +17,7 @@ const vertexShader = /* glsl */ `
   uniform vec2 uTailCenter;
   uniform vec2 uBlink;
   uniform float uDisperse;
+  uniform float uOpacity;
   uniform float uWave;
   uniform vec4 uPattern;
   uniform float uBreath;
@@ -198,7 +199,7 @@ const vertexShader = /* glsl */ `
     // na nuvem, cada partícula brilha com uma cor da paleta
     col = mix(col, mix(base, pat, rnd) * 0.85 + glow * 0.15 * step(0.92, rnd), d);
     size *= 1.0 + d * 0.5;
-    alpha *= 1.0 - d * 0.2;
+    alpha *= (1.0 - d * 0.2) * uOpacity;
 
     vColor = col;
     vAlpha = alpha;
@@ -239,6 +240,7 @@ export function createChameleonMaterial() {
       uTailCenter: { value: ANATOMY.tailCenter.clone() },
       uBlink: { value: new THREE.Vector2() },
       uDisperse: { value: 0 },
+      uOpacity: { value: 1 },
       uWave: { value: 2 },
       uPattern: { value: new THREE.Vector4(0, 0, 0.6, 0.25) },
       uBreath: { value: 0 },
