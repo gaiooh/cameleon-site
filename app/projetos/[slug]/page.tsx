@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { Footer } from "@/components/footer";
-import { Logo } from "@/components/logo";
+import { PageHeader } from "@/components/page-header";
 import { ServiceTags, StatusBadge } from "@/components/portfolio/portfolio-section";
 import { ProjectMedia } from "@/components/portfolio/project-media";
 import { ButtonLink } from "@/components/ui/button";
@@ -32,16 +32,7 @@ export async function generateMetadata({ params }: PageProps<"/projetos/[slug]">
 export default function ProjectPage({ params }: PageProps<"/projetos/[slug]">) {
   return (
     <div className="relative min-h-svh overflow-x-clip">
-      <header className="sticky top-0 z-50 bg-gradient-to-b from-void via-void/80 to-transparent">
-        <div className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-4 px-5 sm:px-8">
-          <Link href="/" aria-label="Cameleon, página inicial">
-            <Logo />
-          </Link>
-          <Link href="/#projetos" className="text-sm text-dim transition-colors hover:text-text">
-            Todos os projetos
-          </Link>
-        </div>
-      </header>
+      <PageHeader backHref="/#projetos" backLabel="Todos os projetos" />
 
       <main className="px-5 sm:px-8">
         <Suspense fallback={<ProjectSkeleton />}>
